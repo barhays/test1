@@ -41,49 +41,108 @@ const question7={
     answers: ["Hanukkah", "Yom Kippur", "Kwanzaa", "Rosh Hashanah"],
     rightanswer: ["Rosh Hashanah"]
 }
-let Questions=[question1 , question2 , question3 , question4 , question5 , question6 , question7]
+
+let Questions = [question1 , question2 , question3 , question4 , question5 , question6 , question7]
+
 let counter=0;
+
+let answersChecked=false;
+
 function FormCreate(Questions){
-    let elem = document.querySelector(".title");
-    let text = document.createElement('h3');
-    text.innerText = `Question ${Questions[counter].numberOfQuestion}/7`;
-    elem.appendChild(text);
-    let elem2 = document.querySelector(".question");
-    let text2 = document.createElement('h3');
-    text2.innerText = Questions[counter].textOfQuestion;
-    elem2.appendChild(text2);
+    let title = document.querySelector(".title");
+    let titleText = document.createElement('h3');
+    titleText.innerText = `Question ${Questions[counter].numberOfQuestion}/7`;
+    title.appendChild(titleText);
+    let question = document.querySelector(".question");
+    let questionText = document.createElement('h3');
+    questionText.innerText = Questions[counter].textOfQuestion;
+    question.appendChild(questionText);
     for(let i=0; i<Questions[counter].answers.length; i++)
     {
-        let elem3=document.querySelector(".buttons");
-        let text3=document.createElement('button');
-        text3.innerText=Questions[counter].answers[i];
-        elem3.appendChild(text3);
+        let buttons=document.querySelector(".buttons");
+        let button=document.createElement('button');
+        button.innerText=Questions[counter].answers[i];
+        buttons.appendChild(button);
     }
     if(Questions[counter].rightanswer.length>1)
     {
-    let elem4 = document.querySelector(".moreInfo");
-    let text4 = document.createElement('h3');
-    text4.innerText = "This question have more then one answer";
-    elem4.appendChild(text4);
+        let moreInfo = document.querySelector(".moreInfo");
+        let moreInfotext = document.createElement('h3');
+        moreInfotext.innerText = "This question have more then one answer";
+        moreInfo.appendChild(moreInfotext);
     }
 }
+
 function DeleteItems(){
-    let deleteitem = document.querySelector(".title")
-    let deleteitem2=document.querySelector(".question")
-    let deleteitem3=document.querySelector(".buttons")
-    let deleteitem4=document.querySelector(".moreInfo")
-    deleteitem.innerHTML = '';
-    deleteitem2.innerHTML = '';
-    deleteitem3.innerHTML = '';
-    deleteitem4.innerHTML = '';
+    let deleteTitle = document.querySelector(".title")
+    let deleteQuestion=document.querySelector(".question")
+    let deleteButtons=document.querySelector(".buttons")
+    let deleteMoreInfo=document.querySelector(".moreInfo")
+    deleteTitle.innerHTML = '';
+    deleteQuestion.innerHTML = '';
+    deleteButtons.innerHTML = '';
+    deleteMoreInfo.innerHTML = '';
 }
 
-FormCreate(Questions)
-let nextbttn=document.querySelector(".nextButton");
-nextbttn.querySelector("button").addEventListener('click',()=>{
-    counter++;
-    DeleteItems();
-    FormCreate(Questions);
+function FinishWindow(){
+    let title = document.querySelector(".title");
+    let titleText = document.createElement('h3');
+    titleText.innerText = "Congratulations, you have successfully passed the test.";
+    title.appendChild(titleText);
+    let moreInfo = document.querySelector(".moreInfo");
+    let MoreInfoText = document.createElement('h3');
+    MoreInfoText.innerText = "Number of correct answers:";
+    moreInfo.appendChild(MoreInfoText);
+    let againButton = document.querySelector(".againButton");
+    let button = document.createElement('button');
+    button.innerText = "Take the test again";
+    againButton.appendChild(button);
+}
 
-})
+function NextButtonCreate(){
+    let nextButton = document.querySelector(".nextButton");
+    let button = document.createElement('button');
+    button.innerText = "Next";
+    nextButton.appendChild(button);
+}
+
+onCreate();
+
+function onCreate()
+{
+    FormCreate(Questions)
+    NextButtonCreate()
+    
+    if(answersChecked==true)
+    {
+        let nextbttn=document.querySelector(".nextButton");
+        nextbttn.querySelector("button").addEventListener('click',()=>{
+            counter++;
+            if(counter <= Questions.length-1)
+            {
+                DeleteItems();
+                FormCreate(Questions);
+            }
+            else
+            {
+                let deleteNextButton=document.querySelector(".nextButton")
+                deleteNextButton.innerHTML = '';
+                DeleteItems();
+                FinishWindow();  
+                let againbttn=document.querySelector(".againButton");
+                againbttn.querySelector("button").addEventListener('click',() =>{
+                    
+                    counter=0;
+                    DeleteItems();
+                    let deleteAgainButton=document.querySelector(".againButton")
+                    deleteAgainButton.innerHTML = '';
+                    onCreate();
+            })
+            }
+        })
+    }
+}
+
+
+
 
