@@ -1,0 +1,15 @@
+#container {
+    width:50%;
+    margin:auto;
+    padding: 0px 25px 40px 10px;
+    background-color: #e9ecf0;
+    border:1px solid #f7fbfc;
+    border-radius:5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px #888;
+}
+#title {
+    text-align: center;
+    color: black;
+}
