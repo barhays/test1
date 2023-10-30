@@ -1,5 +1,6 @@
 .container {
-    width:40%;
+    width: 800px;
+    height: 300px;
     margin:auto;
     margin-top: 10%;
     padding: 0px 25px 40px 10px;
@@ -51,6 +52,17 @@
     text-decoration: none;
     font-size: 16px;
     position:absolute;
-    right: 0px;
-    bottom: 0px;
+    right: 10px;
+    bottom: 10px;
+}
+.againButton > button{
+    background-color: #0f1dc0;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 300px;
+    margin-top: 50px;
 }
