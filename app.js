@@ -16,7 +16,7 @@ const question3={
 const question4={
     numberOfQuestion: 4,
     textOfQuestion: "How many chromosomes are in the human genome?",
-    answers: [42, 44, 46]
+    answers: [42, 44, 46, 58, 72]
 }
 const question5={
     numberOfQuestion: 5,
@@ -51,7 +51,22 @@ function FormCreate(Questions){
         text3.innerText=Questions[counter].answers[i];
         elem3.appendChild(text3);
     }
-    
-
 }
+function DeleteItems(){
+    let deleteitem = document.querySelector(".title")
+    let deleteitem2=document.querySelector(".question")
+    let deleteitem3=document.querySelector(".buttons")
+    deleteitem.innerHTML = '';
+    deleteitem2.innerHTML = '';
+    deleteitem3.innerHTML = '';
+}
+
 FormCreate(Questions)
+let nextbttn=document.querySelector(".nextButton");
+nextbttn.querySelector("button").addEventListener('click',()=>{
+    counter++;
+    DeleteItems();
+    FormCreate(Questions);
+
+})
+
