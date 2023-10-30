@@ -13,6 +13,10 @@
     position: relative;
 
 }
+.moreInfo{
+    text-align: center;
+    color: black;
+}
 .title {
     text-align: center;
     color: black;
