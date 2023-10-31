@@ -12,6 +12,7 @@
     box-shadow: 5px 5px 5px #888;
     top: 50%;
     position: relative;
+    flex-wrap: wrap;
 
 }
 .moreInfo{
