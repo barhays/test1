@@ -121,6 +121,9 @@ function onCreate()
     FormCreate(Questions)
     document.querySelectorAll(".buttons").forEach(elem => {
         elem.addEventListener('click', (e)=>{
+            if(e.target === document.querySelector('.buttons')){
+                return;
+            }
             if(answersChecked == false)
             {
                 if(Questions[counter].rightanswer.length == 1)
@@ -145,7 +148,7 @@ function onCreate()
                         if(Questions[counter].rightanswer.includes(e.target.innerText))
                         {
                             e.target.style.backgroundColor = "green";
-                            rightanswercounter=rightanswercounter+ 0.5;
+                            rightanswercounter += 0.5;
                         } 
                         else 
                         {
