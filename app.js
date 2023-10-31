@@ -50,6 +50,8 @@ let answersChecked = false;
 
 let rightanswercounter = 0;
 
+let selectedItemscounter = 0;
+
 
 function FormCreate(Questions){
     let title = document.querySelector(".title");
@@ -112,6 +114,8 @@ function FinishWindow(){
 
 onCreate();
 
+let answers = new Set();
+
 function onCreate()
 {
     FormCreate(Questions)
@@ -119,7 +123,6 @@ function onCreate()
         elem.addEventListener('click', (e)=>{
             if(answersChecked == false)
             {
-                console.log("im here")
                 if(Questions[counter].rightanswer.length == 1)
                 {
                     if(Questions[counter].rightanswer[0] == e.target.innerText)
@@ -136,7 +139,23 @@ function onCreate()
                 }
                 else
                 {
-                    answersChecked = true;
+                    if(answers.size !== Questions[counter].rightanswer.length)
+                    {
+                        answers.add(e.target.innerText);
+                        if(Questions[counter].rightanswer.includes(e.target.innerText))
+                        {
+                            e.target.style.backgroundColor = "green";
+                            rightanswercounter=rightanswercounter+ 0.5;
+                        } 
+                        else 
+                        {
+                            e.target.style.backgroundColor = "red";
+                        } 
+                    }
+                    else 
+                    {
+                        answersChecked = true;
+                    }
                 }
             }  
         })
@@ -162,6 +181,7 @@ function onCreate()
             counter = 0;
             answersChecked = false;
             rightanswercounter=0;
+            answers.clear();
             DeleteItems();
             onCreate();
             })
