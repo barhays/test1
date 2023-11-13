@@ -1,8 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
 .container {
-    width: 800px;
-    height: 300px;
+    width: 900px;
+    height: auto;
     margin:auto;
-    margin-top: 10%;
     padding: 0px 25px 40px 10px;
     background-color: #e9ecf0;
     border:1px solid #f7fbfc;
@@ -10,9 +23,17 @@
     color: #FFFFFF;
     font-weight: bold;
     box-shadow: 5px 5px 5px #888;
-    top: 50%;
     position: relative;
     flex-wrap: wrap;
+    @media (max-width: 1400px) {
+        width: 700px;
+    }  
+    @media (max-width: 900px) {
+        width: 500px;
+    }  
+    @media (max-width: 700px) {
+        width: 350px;
+    }  
 
 }
 .moreInfo{
@@ -22,10 +43,12 @@
 .title {
     text-align: center;
     color: black;
+    margin: 20px 0px;
 }
 .question{
     text-align: center;
     color: black;
+    margin: 20px 0px;
 }
 .buttons > button{
     background-color: #0f1dc0;
@@ -52,9 +75,12 @@
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    position:absolute;
-    right: 10px;
-    bottom: 10px;
+}
+.nextButton {
+    min-width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
 }
 .againButton > button{
     background-color: #0f1dc0;
