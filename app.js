@@ -103,7 +103,7 @@ function FinishWindow(){
     title.appendChild(titleText);
     let moreInfo = document.querySelector(".moreInfo");
     let MoreInfoText = document.createElement('h3');
-    MoreInfoText.innerText = "Number of correct answers:"+ rightanswercount;
+    MoreInfoText.innerText = "Number of correct answers:"+ Math.round(rightanswercount);
     moreInfo.appendChild(MoreInfoText);
     let againButton = document.querySelector(".againButton");
     let button = document.createElement('button');
