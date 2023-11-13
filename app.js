@@ -42,7 +42,11 @@ const question7 ={
     rightanswer: ["Rosh Hashanah"]
 }
 
-let Questions = [question1 , question2 , question3 , question4 , question5 , question6 , question7]
+const Questions = [question1 , question2 , question3 , question4 , question5 , question6 , question7]
+
+const wronganswercolor ="red";
+
+const correctanswercolor = "green";
 
 let counter = 0;
 
@@ -125,13 +129,13 @@ function onCreate()
                 {
                     if(Questions[counter].rightanswer[0] == e.target.innerText)
                     {
-                        e.target.style.backgroundColor = "green"
+                        e.target.style.backgroundColor = correctanswercolor;
                         answersChecked = true;
                         rightanswercount += 1/Questions[counter].rightanswer.length
                     }
                     else
                     {
-                        e.target.style.backgroundColor = "red"
+                        e.target.style.backgroundColor = wronganswercolor;
                         answersChecked = true;
                     }
                 }
@@ -143,12 +147,12 @@ function onCreate()
                         answers.add(e.target.innerText);
                         if(Questions[counter].rightanswer.includes(e.target.innerText))
                         {
-                            e.target.style.backgroundColor = "green";
+                            e.target.style.backgroundColor = correctanswercolor;
                             rightanswercount += 1/Questions[counter].rightanswer.length;
                         } 
                         else 
                         {
-                            e.target.style.backgroundColor = "red";
+                            e.target.style.backgroundColor = wronganswercolor;
                         } 
                         if(answers.size == Questions[counter].rightanswer.length)
                         {
