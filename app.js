@@ -42,70 +42,57 @@ const question7 ={
     rightanswer: ["Rosh Hashanah"]
 }
 
-const Questions = [question1 , question2 , question3 , question4 , question5 , question6 , question7]
-
+const questions = [question1 , question2 , question3 , question4 , question5 , question6 , question7]
 const wronganswercolor ="red";
-
 const correctanswercolor = "green";
-
 let counter = 0;
-
-let answersChecked = false;
-
+let answerschecked = false;
 let rightanswercount = 0;
+const title = document.querySelector(".title");
+const question = document.querySelector(".question");
+const buttons = document.querySelector(".buttons");
+const moreInfo = document.querySelector(".moreInfo");
+const nextButton = document.querySelector(".nextButton");
+const againButton = document.querySelector(".againButton");
 
+function FormCreate(questions){
 
-
-function FormCreate(Questions){
-    let title = document.querySelector(".title");
     let titleText = document.createElement('h3');
-    titleText.innerText = `Question ${Questions[counter].numberOfQuestion}/${Questions.length}`;
+    titleText.innerText = `Question ${questions[counter].numberOfQuestion}/${questions.length}`;
     title.appendChild(titleText);
-    let question = document.querySelector(".question");
     let questionText = document.createElement('h3');
-    questionText.innerText = Questions[counter].textOfQuestion;
+    questionText.innerText = questions[counter].textOfQuestion;
     question.appendChild(questionText);
-    for(let i = 0; i < Questions[counter].answers.length; i++)
+    for(let i = 0; i < questions[counter].answers.length; i++)
     {
-        let buttons = document.querySelector(".buttons");
         let button = document.createElement('button');
-        button.innerText = Questions[counter].answers[i];
+        button.innerText = questions[counter].answers[i];
         buttons.appendChild(button);
     }
-    if(Questions[counter].rightanswer.length>1)
+    if(questions[counter].rightanswer.length>1)
     {
-        let moreInfo = document.querySelector(".moreInfo");
         let moreInfotext = document.createElement('h3');
         moreInfotext.innerText = "This question have more then one answer";
         moreInfo.appendChild(moreInfotext);
-    }
-    let nextButton = document.querySelector(".nextButton");
+    };
     let button = document.createElement('button');
     button.innerText = "Next";
     nextButton.appendChild(button);
 }
 
 function DeleteItems(){
-    let deleteTitle = document.querySelector(".title")
-    let deleteQuestion = document.querySelector(".question")
-    let deleteButtons = document.querySelector(".buttons")
-    let deleteMoreInfo = document.querySelector(".moreInfo")
-    let deleteNextButton = document.querySelector(".nextButton")
-    let deleteAgainButton = document.querySelector(".againButton")
-    deleteAgainButton.innerHTML = '';
-    deleteNextButton.innerHTML = '';
-    deleteTitle.innerHTML = '';
-    deleteQuestion.innerHTML = '';
-    deleteButtons.innerHTML = '';
-    deleteMoreInfo.innerHTML = '';
+    againButton.innerHTML = '';
+    nextButton.innerHTML = '';
+    title.innerHTML = '';
+    question.innerHTML = '';
+    buttons.innerHTML = '';
+    moreInfo.innerHTML = '';
 }
 
 function FinishWindow(){
-    let title = document.querySelector(".title");
     let titleText = document.createElement('h3');
     titleText.innerText = "Congratulations, you have successfully passed the test.";
     title.appendChild(titleText);
-    let moreInfo = document.querySelector(".moreInfo");
     let MoreInfoText = document.createElement('h3');
     MoreInfoText.innerText = "Number of correct answers:"+ Math.round(rightanswercount);
     moreInfo.appendChild(MoreInfoText);
@@ -114,10 +101,11 @@ function FinishWindow(){
     button.innerText = "Take the test again";
     againButton.appendChild(button);
 }
+
 function AgainButtonClick(){
-    document.querySelector(".againButton").querySelector("button").addEventListener('click',() =>{
+    againButton.querySelector("button").addEventListener('click',() =>{
         counter = 0;
-        answersChecked = false;
+        answerschecked = false;
         rightanswercount=0;
         DeleteItems();
         onCreate();
@@ -125,43 +113,42 @@ function AgainButtonClick(){
 }
 function AnswersButtonClick(){
     let answers = new Set();
-    let but= document.querySelector(".buttons")
-    but.querySelectorAll("button").forEach(elem => {
+    buttons.querySelectorAll("button").forEach(elem => {
     elem.addEventListener('click', (e)=>{
-            if(answersChecked == false)
+            if(answerschecked == false)
             {
-                if(Questions[counter].rightanswer.length == 1)
+                if(questions[counter].rightanswer.length == 1)
                 {
-                    if(Questions[counter].rightanswer[0] == e.target.innerText)
+                    if(questions[counter].rightanswer[0] == e.target.innerText)
                     {
                         e.target.style.backgroundColor = correctanswercolor;
-                        answersChecked = true;
-                        rightanswercount += 1/Questions[counter].rightanswer.length
+                        answerschecked = true;
+                        rightanswercount += 1/questions[counter].rightanswer.length
                     }
                     else
                     {
                         e.target.style.backgroundColor = wronganswercolor;
-                        answersChecked = true;
+                        answerschecked = true;
                     }
                 }
                 else
                 {
                     
-                    if(answers.size !== Questions[counter].rightanswer.length)
+                    if(answers.size !== questions[counter].rightanswer.length)
                     {
                         answers.add(e.target.innerText);
-                        if(Questions[counter].rightanswer.includes(e.target.innerText))
+                        if(questions[counter].rightanswer.includes(e.target.innerText))
                         {
                             e.target.style.backgroundColor = correctanswercolor;
-                            rightanswercount += 1/Questions[counter].rightanswer.length;
+                            rightanswercount += 1/questions[counter].rightanswer.length;
                         } 
                         else 
                         {
                             e.target.style.backgroundColor = wronganswercolor;
                         } 
-                        if(answers.size == Questions[counter].rightanswer.length)
+                        if(answers.size == questions[counter].rightanswer.length)
                         {
-                            answersChecked=true;
+                            answerschecked=true;
                         }
                     }
                 }
@@ -171,16 +158,16 @@ function AnswersButtonClick(){
     }); 
 }
 function NextButtonClick(){
-    document.querySelector(".nextButton").querySelector("button").addEventListener('click',()=>{
+    nextButton.querySelector("button").addEventListener('click',()=>{
 
-        if(counter < Questions.length)
+        if(counter < questions.length)
         {
-            if(answersChecked)
+            if(answerschecked)
             {
             counter++;
-            answersChecked = false;
+            answerschecked = false;
             DeleteItems();
-            if(counter === Questions.length)
+            if(counter === questions.length)
             {
                 DeleteItems();
                 FinishWindow();  
@@ -197,7 +184,7 @@ function NextButtonClick(){
 onCreate();
 function onCreate()
 {
-    FormCreate(Questions)
+    FormCreate(questions)
     AnswersButtonClick();
     NextButtonClick();
 }
