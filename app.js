@@ -114,11 +114,16 @@ function FinishWindow(){
     button.innerText = "Take the test again";
     againButton.appendChild(button);
 }
-
-onCreate();
-function onCreate()
-{
-    FormCreate(Questions)
+function AgainButtonClick(){
+    document.querySelector(".againButton").querySelector("button").addEventListener('click',() =>{
+        counter = 0;
+        answersChecked = false;
+        rightanswercount=0;
+        DeleteItems();
+        onCreate();
+    })
+}
+function AnswersButtonClick(){
     let answers = new Set();
     let but= document.querySelector(".buttons")
     but.querySelectorAll("button").forEach(elem => {
@@ -163,7 +168,9 @@ function onCreate()
             }  
         })
         
-    });
+    }); 
+}
+function NextButtonClick(){
     document.querySelector(".nextButton").querySelector("button").addEventListener('click',()=>{
 
         if(counter < Questions.length)
@@ -177,13 +184,7 @@ function onCreate()
             {
                 DeleteItems();
                 FinishWindow();  
-                document.querySelector(".againButton").querySelector("button").addEventListener('click',() =>{
-                    counter = 0;
-                    answersChecked = false;
-                    rightanswercount=0;
-                    DeleteItems();
-                    onCreate();
-                })
+                AgainButtonClick();
             }
             else
             {
@@ -192,4 +193,11 @@ function onCreate()
             }
         }
     })  
+}
+onCreate();
+function onCreate()
+{
+    FormCreate(Questions)
+    AnswersButtonClick();
+    NextButtonClick();
 }
