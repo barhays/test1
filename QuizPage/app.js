@@ -1,5 +1,5 @@
 
-import { themes } from "./topics.js";
+import { themes } from "../topics.js";
 const questions = themes[localStorage.getItem('current_topic')];
 const wronganswercolor ="red";
 const correctanswercolor = "green";
