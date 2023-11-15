@@ -11,9 +11,39 @@ const buttons = document.querySelector(".buttons");
 const moreInfo = document.querySelector(".moreInfo");
 const nextButton = document.querySelector(".nextButton");
 const againButton = document.querySelector(".againButton");
+let time;
 
 function FormCreate(questions) {
+    document.getElementById('sec').innerText = 10;
+    let interval = setInterval(() => {
+        time = document.getElementById('sec').innerText
+        if (time != 0) {
+            document.getElementById('sec').innerText--
+        }
+        else{
+            clearInterval(interval);
+            if(counter < questions.length) {
+                    counter++;
+                    localStorage.setItem('counter', counter)
+                    answerschecked = false;
+                    document.getElementById('sec').innerText = 10;
+                    DeleteItems();
 
+                    if(counter === questions.length) {
+
+                        DeleteItems();
+                        FinishWindow();  
+                        AgainButtonClick();
+                        SelectTopic();
+    
+                    }else {
+    
+                        onCreate();
+                        
+                    }
+                }
+        }
+    }, 1000)
     let titleText = document.createElement('h3');
     titleText.innerText = `Question ${questions[localStorage.getItem('counter')].numberOfQuestion}/${questions.length}`;
     title.appendChild(titleText);
@@ -36,11 +66,15 @@ function FormCreate(questions) {
 
     let button = document.createElement('button');
     button.innerText = "Next";
+    button.addEventListener('click', ()=>{
+        clearInterval(interval);
+    })
     nextButton.appendChild(button);
 }
 
 function DeleteItems() {
     let selectTopicButton = document.querySelector(".selectTopicButton")
+    document.getElementById('sec').innerHTML= '';
     selectTopicButton.innerHTML = '';
     againButton.innerHTML = '';
     nextButton.innerHTML = '';
@@ -142,6 +176,7 @@ function NextButtonClick() {
                 counter++;
                 localStorage.setItem('counter', counter)
                 answerschecked = false;
+                document.getElementById('sec').innerText = 10;
                 DeleteItems();
 
                 if(counter === questions.length) {
@@ -162,7 +197,7 @@ function NextButtonClick() {
 }
 onCreate();
 function onCreate() {
-    FormCreate(questions)
+    FormCreate(questions);
     AnswersButtonClick();
     NextButtonClick();
 }
