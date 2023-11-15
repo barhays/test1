@@ -115,8 +115,6 @@ function AnswersButtonClick() {
 
                             e.target.style.backgroundColor = correctanswercolor;
                             rightanswercount = +rightanswercount + 1/questions[localStorage.getItem('counter')].rightanswer.length;
-                            console.log(rightanswercount)
-                            console.log( 1/questions[localStorage.getItem('counter')].rightanswer.length)
                         }else {
 
                             e.target.style.backgroundColor = wronganswercolor;
