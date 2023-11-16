@@ -1,7 +1,7 @@
 
 import { themes } from "./topics.js";
 const questions = themes[localStorage.getItem('current_topic')];
-const wronganswercolor ="red";
+const wronganswercolor = "red";
 const correctanswercolor = "green";
 let answerschecked = false;
 let counter = localStorage.getItem('counter')
@@ -14,34 +14,35 @@ const againButton = document.querySelector(".againButton");
 let time;
 
 function FormCreate(questions) {
-    document.getElementById('sec').innerText = 10;
+    document.getElementById('sec').innerText = localStorage.getItem("timercount")
     let interval = setInterval(() => {
         time = document.getElementById('sec').innerText
         if (time != 0) {
             document.getElementById('sec').innerText--
+            localStorage.setItem("timercount", document.getElementById('sec').innerText)
         }
-        else{
+        else {
             clearInterval(interval);
-            if(counter < questions.length) {
-                    counter++;
-                    localStorage.setItem('counter', counter)
-                    answerschecked = false;
-                    document.getElementById('sec').innerText = 10;
+            if (counter < questions.length) {
+                counter++;
+                localStorage.setItem('counter', counter)
+                answerschecked = false;
+                localStorage.setItem("timercount", 10)
+                DeleteItems();
+
+                if (counter === questions.length) {
+
                     DeleteItems();
+                    FinishWindow();
+                    AgainButtonClick();
+                    SelectTopic();
 
-                    if(counter === questions.length) {
+                } else {
 
-                        DeleteItems();
-                        FinishWindow();  
-                        AgainButtonClick();
-                        SelectTopic();
-    
-                    }else {
-    
-                        onCreate();
-                        
-                    }
+                    onCreate();
+
                 }
+            }
         }
     }, 1000)
     let titleText = document.createElement('h3');
@@ -52,13 +53,14 @@ function FormCreate(questions) {
     questionText.innerText = questions[localStorage.getItem('counter')].textOfQuestion;
     question.appendChild(questionText);
 
-    for(let i = 0; i < questions[localStorage.getItem('counter')].answers.length; i++) {
+    for (let i = 0; i < questions[localStorage.getItem('counter')].answers.length; i++) {
         let button = document.createElement('button');
+        button.style = "cursor: pointer;";
         button.innerText = questions[localStorage.getItem('counter')].answers[i];
         buttons.appendChild(button);
     }
 
-    if(questions[localStorage.getItem('counter')].rightanswer.length>1) {
+    if (questions[localStorage.getItem('counter')].rightanswer.length > 1) {
         let moreInfotext = document.createElement('h3');
         moreInfotext.innerText = "This question have more then one answer";
         moreInfo.appendChild(moreInfotext);
@@ -66,15 +68,17 @@ function FormCreate(questions) {
 
     let button = document.createElement('button');
     button.innerText = "Next";
-    button.addEventListener('click', ()=>{
+    button.style = "cursor: pointer;";
+    button.addEventListener('click', () => {
         clearInterval(interval);
     })
     nextButton.appendChild(button);
 }
 
+
 function DeleteItems() {
     let selectTopicButton = document.querySelector(".selectTopicButton")
-    document.getElementById('sec').innerHTML= '';
+    document.getElementById('sec').innerHTML = '';
     selectTopicButton.innerHTML = '';
     againButton.innerHTML = '';
     nextButton.innerHTML = '';
@@ -90,21 +94,23 @@ function FinishWindow() {
     title.appendChild(titleText);
 
     let MoreInfoText = document.createElement('h3');
-    MoreInfoText.innerText = "Number of correct answers:"+ localStorage.getItem('rightanswercount');
+    MoreInfoText.innerText = "Number of correct answers:" + localStorage.getItem('rightanswercount');
     moreInfo.appendChild(MoreInfoText);
 
     let button = document.createElement('button');
     button.innerText = "Take the test again";
+    button.style = "cursor: pointer;";
     againButton.appendChild(button);
 
     let selectTopicButton = document.querySelector(".selectTopicButton")
     let selectbutton = document.createElement('button');
+    selectbutton.style = "cursor: pointer;";
     selectbutton.innerText = "Go back to select topic";
     selectTopicButton.appendChild(selectbutton);
 }
 
 function AgainButtonClick() {
-    againButton.querySelector("button").addEventListener('click',() => {
+    againButton.querySelector("button").addEventListener('click', () => {
         counter = 0;
         answerschecked = false;
         localStorage.setItem('counter', 0);
@@ -113,87 +119,87 @@ function AgainButtonClick() {
         onCreate();
     })
 }
-function SelectTopic(){
-    document.querySelector(".selectTopicButton").querySelector("button").addEventListener('click',() => {
+function SelectTopic() {
+    document.querySelector(".selectTopicButton").querySelector("button").addEventListener('click', () => {
         localStorage.removeItem("current_topic")
-        window.location.href='homePage.html';
+        window.location.href = 'homePage.html';
     })
 }
 function AnswersButtonClick() {
     let answers = new Set();
     let rightanswercount = localStorage.getItem('rightanswercount')
     buttons.querySelectorAll("button").forEach(elem => {
-    elem.addEventListener('click', (e)=> {
-            if(answerschecked == false) {
+        elem.addEventListener('click', (e) => {
+            if (answerschecked == false) {
 
-                if(questions[localStorage.getItem('counter')].rightanswer.length == 1) {
+                if (questions[localStorage.getItem('counter')].rightanswer.length == 1) {
 
-                    if(questions[localStorage.getItem('counter')].rightanswer[0] == e.target.innerText) {
+                    if (questions[localStorage.getItem('counter')].rightanswer[0] == e.target.innerText) {
 
                         e.target.style.backgroundColor = correctanswercolor;
                         answerschecked = true;
                         rightanswercount++;
                         localStorage.setItem('rightanswercount', rightanswercount)
-                    }else {
+                    } else {
 
                         e.target.style.backgroundColor = wronganswercolor;
                         answerschecked = true;
                     }
-                }else {
+                } else {
 
-                    if(answers.size !== questions[localStorage.getItem('counter')].rightanswer.length) {
+                    if (answers.size !== questions[localStorage.getItem('counter')].rightanswer.length) {
 
                         answers.add(e.target.innerText);
 
-                        if(questions[localStorage.getItem('counter')].rightanswer.includes(e.target.innerText)) {
+                        if (questions[localStorage.getItem('counter')].rightanswer.includes(e.target.innerText)) {
 
                             e.target.style.backgroundColor = correctanswercolor;
-                            rightanswercount = +rightanswercount + 1/questions[localStorage.getItem('counter')].rightanswer.length;
-                        }else {
+                            rightanswercount = +rightanswercount + 1 / questions[localStorage.getItem('counter')].rightanswer.length;
+                        } else {
 
                             e.target.style.backgroundColor = wronganswercolor;
 
-                        } 
-                        if(answers.size == questions[localStorage.getItem('counter')].rightanswer.length) {
+                        }
+                        if (answers.size == questions[localStorage.getItem('counter')].rightanswer.length) {
                             localStorage.setItem('rightanswercount', Math.round(rightanswercount))
-                            answerschecked=true;
+                            answerschecked = true;
 
                         }
                     }
                 }
-            }  
+            }
         })
-        
-    }); 
+
+    });
 }
 function NextButtonClick() {
-    nextButton.querySelector("button").addEventListener('click',()=> {
+    nextButton.querySelector("button").addEventListener('click', () => {
 
-        if(counter < questions.length) {
+        if (counter < questions.length) {
 
-            if(answerschecked) {
+            if (answerschecked) {
 
                 counter++;
                 localStorage.setItem('counter', counter)
                 answerschecked = false;
-                document.getElementById('sec').innerText = 10;
+                localStorage.setItem("timercount", 10)
                 DeleteItems();
 
-                if(counter === questions.length) {
+                if (counter === questions.length) {
 
                     DeleteItems();
-                    FinishWindow();  
+                    FinishWindow();
                     AgainButtonClick();
                     SelectTopic();
 
-                }else {
+                } else {
 
                     onCreate();
-                    
+
                 }
             }
         }
-    })  
+    })
 }
 onCreate();
 function onCreate() {
