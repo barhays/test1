@@ -12,8 +12,21 @@ const moreInfo = document.querySelector(".moreInfo");
 const nextButton = document.querySelector(".nextButton");
 const againButton = document.querySelector(".againButton");
 let time;
+var openPopupButton = document.getElementById('openPopupButton');
+var popupMenu = document.getElementById('popupMenu');
+var lightThemeButton = document.getElementById('lightThemeButton');
+var darkThemeButton = document.getElementById('darkThemeButton');
 
-function FormCreate(questions) {
+function setTheme(theme) {
+    var body = document.body;
+
+    if (theme === 'dark') {
+        body.classList.add('dark-theme');
+    } else {
+        body.classList.remove('dark-theme');
+    }
+}
+function onFormCreate(questions) {
     document.getElementById('sec').innerText = localStorage.getItem("timercount")
     let interval = setInterval(() => {
         time = document.getElementById('sec').innerText
@@ -28,14 +41,14 @@ function FormCreate(questions) {
                 localStorage.setItem('counter', counter)
                 answerschecked = false;
                 localStorage.setItem("timercount", 10)
-                DeleteItems();
+                onDeleteItems();
 
                 if (counter === questions.length) {
 
-                    DeleteItems();
-                    FinishWindow();
-                    AgainButtonClick();
-                    SelectTopic();
+                    onDeleteItems();
+                    onFinishWindow();
+                    handleAgainButtonClick();
+                    handlerSelectTopicButtonClick();
 
                 } else {
 
@@ -55,7 +68,6 @@ function FormCreate(questions) {
 
     for (let i = 0; i < questions[localStorage.getItem('counter')].answers.length; i++) {
         let button = document.createElement('button');
-        button.style = "cursor: pointer;";
         button.innerText = questions[localStorage.getItem('counter')].answers[i];
         buttons.appendChild(button);
     }
@@ -68,7 +80,6 @@ function FormCreate(questions) {
 
     let button = document.createElement('button');
     button.innerText = "Next";
-    button.style = "cursor: pointer;";
     button.addEventListener('click', () => {
         clearInterval(interval);
     })
@@ -76,7 +87,7 @@ function FormCreate(questions) {
 }
 
 
-function DeleteItems() {
+function onDeleteItems() {
     let selectTopicButton = document.querySelector(".selectTopicButton")
     document.getElementById('sec').innerHTML = '';
     selectTopicButton.innerHTML = '';
@@ -88,7 +99,7 @@ function DeleteItems() {
     moreInfo.innerHTML = '';
 }
 
-function FinishWindow() {
+function onFinishWindow() {
     let titleText = document.createElement('h3');
     titleText.innerText = "Congratulations, you have successfully passed the test.";
     title.appendChild(titleText);
@@ -99,33 +110,32 @@ function FinishWindow() {
 
     let button = document.createElement('button');
     button.innerText = "Take the test again";
-    button.style = "cursor: pointer;";
     againButton.appendChild(button);
 
     let selectTopicButton = document.querySelector(".selectTopicButton")
     let selectbutton = document.createElement('button');
-    selectbutton.style = "cursor: pointer;";
     selectbutton.innerText = "Go back to select topic";
     selectTopicButton.appendChild(selectbutton);
+    localStorage.setItem('counter', 0);
 }
 
-function AgainButtonClick() {
+function handleAgainButtonClick() {
     againButton.querySelector("button").addEventListener('click', () => {
         counter = 0;
         answerschecked = false;
         localStorage.setItem('counter', 0);
         localStorage.setItem('rightanswercount', 0);
-        DeleteItems();
+        onDeleteItems();
         onCreate();
     })
 }
-function SelectTopic() {
+function handlerSelectTopicButtonClick() {
     document.querySelector(".selectTopicButton").querySelector("button").addEventListener('click', () => {
         localStorage.removeItem("current_topic")
         window.location.href = 'homePage.html';
     })
 }
-function AnswersButtonClick() {
+function handleAnswersButtonClick() {
     let answers = new Set();
     let rightanswercount = localStorage.getItem('rightanswercount')
     buttons.querySelectorAll("button").forEach(elem => {
@@ -172,7 +182,7 @@ function AnswersButtonClick() {
 
     });
 }
-function NextButtonClick() {
+function handleNextButtonClick() {
     nextButton.querySelector("button").addEventListener('click', () => {
 
         if (counter < questions.length) {
@@ -183,14 +193,14 @@ function NextButtonClick() {
                 localStorage.setItem('counter', counter)
                 answerschecked = false;
                 localStorage.setItem("timercount", 10)
-                DeleteItems();
+                onDeleteItems();
 
                 if (counter === questions.length) {
 
-                    DeleteItems();
-                    FinishWindow();
-                    AgainButtonClick();
-                    SelectTopic();
+                    onDeleteItems();
+                    onFinishWindow();
+                    handleAgainButtonClick();
+                    handlerSelectTopicButtonClick();
 
                 } else {
 
@@ -201,9 +211,33 @@ function NextButtonClick() {
         }
     })
 }
+function handleChangeTheme() {
+    openPopupButton.addEventListener('click', function () {
+        popupMenu.style.display = 'block';
+    });
+
+    lightThemeButton.addEventListener('click', function () {
+        localStorage.setItem('themecolor', 'light')
+        setTheme('light');
+        popupMenu.style.display = 'none';
+    });
+
+    darkThemeButton.addEventListener('click', function () {
+        localStorage.setItem('themecolor', 'dark')
+        setTheme('dark');
+        popupMenu.style.display = 'none';
+    });
+}
+if (localStorage.getItem('themecolor') === 'dark') {
+    setTheme('dark')
+}
+else {
+    setTheme('light')
+}
+handleChangeTheme();
 onCreate();
 function onCreate() {
-    FormCreate(questions);
-    AnswersButtonClick();
-    NextButtonClick();
+    onFormCreate(questions);
+    handleAnswersButtonClick();
+    handleNextButtonClick();
 }
