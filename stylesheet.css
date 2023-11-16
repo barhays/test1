@@ -20,6 +20,7 @@ body {
     min-height: 100vh;
     padding: 15px;
     flex-direction: column;
+    background-image: radial-gradient(circle, #c2c2c2, #f1f1f1);
 }
 
 .container {
@@ -75,6 +76,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .buttons {
@@ -94,6 +96,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .nextButton {
@@ -112,6 +115,7 @@ body {
     text-decoration: none;
     font-size: 16px;
     display: flex;
+    cursor: pointer;
 }
 
 .againButton {
@@ -136,4 +140,73 @@ body {
     padding: 15px 32px;
     text-decoration: none;
     font-size: 16px;
+    cursor: pointer;
+}
+
+.changeButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.button {
+    padding: 12px 24px;
+    background-color: #0f0fd1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0808a3;
+}
+
+.popup-menu {
+    display: none;
+    position: absolute;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    color: #000;
+    /* Цвет текста оставлен черным */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1;
+    width: 200px;
+    top: calc(100% + 10px);
+    left: 0;
+}
+
+.popup-menu-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-menu-item:hover {
+    background-color: #f9f9f9;
+}
+
+.dark-theme {
+    background-image: linear-gradient(to left top, #000000, #222222);
+
+    color: #fff;
 }
