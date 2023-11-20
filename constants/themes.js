@@ -1,4 +1,4 @@
-export const Planets = [
+const Planets = [
     {
         numberOfQuestion: 1,
         textOfQuestion: "How many planets are in the solar system?",
