@@ -24,7 +24,7 @@ body {
 }
 
 .container {
-    width: 900px;
+    width: 100%;
     height: auto;
     justify-self: center;
     align-self: center;
@@ -36,19 +36,7 @@ body {
     font-weight: bold;
     box-shadow: 5px 5px 5px #888;
     flex-wrap: wrap;
-
-    @media (max-width: 1400px) {
-        width: 700px;
-    }
-
-    @media (max-width: 900px) {
-        width: 500px;
-    }
-
-    @media (max-width: 700px) {
-        width: 350px;
-    }
-
+    max-width: 980px;
 }
 
 .moreInfo {
