@@ -1,5 +1,5 @@
 
-import { themes } from "./topics.js";
+import { themes } from "./constants/themes.js";
 const questions = themes[localStorage.getItem('current_topic')];
 const wronganswercolor = "red";
 const correctanswercolor = "green";
@@ -12,13 +12,13 @@ const moreInfo = document.querySelector(".moreInfo");
 const nextButton = document.querySelector(".nextButton");
 const againButton = document.querySelector(".againButton");
 let time;
-var openPopupButton = document.getElementById('openPopupButton');
-var popupMenu = document.getElementById('popupMenu');
-var lightThemeButton = document.getElementById('lightThemeButton');
-var darkThemeButton = document.getElementById('darkThemeButton');
+const openPopupButton = document.getElementById('openPopupButton');
+const popupMenu = document.getElementById('popupMenu');
+const lightThemeButton = document.getElementById('lightThemeButton');
+const darkThemeButton = document.getElementById('darkThemeButton');
 
 function setTheme(theme) {
-    var body = document.body;
+    let body = document.body;
 
     if (theme === 'dark') {
         body.classList.add('dark-theme');
