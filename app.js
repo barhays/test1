@@ -16,6 +16,8 @@ const openPopupButton = document.getElementById('openPopupButton');
 const popupMenu = document.getElementById('popupMenu');
 const lightThemeButton = document.getElementById('lightThemeButton');
 const darkThemeButton = document.getElementById('darkThemeButton');
+const progressBar = document.querySelector(".progressbar")
+
 
 function setTheme(theme) {
     let body = document.body;
@@ -97,6 +99,7 @@ function onDeleteItems() {
     question.innerHTML = '';
     buttons.innerHTML = '';
     moreInfo.innerHTML = '';
+    progressBar.innerHTML = '';
 }
 
 function onFinishWindow() {
@@ -234,10 +237,17 @@ if (localStorage.getItem('themecolor') === 'dark') {
 else {
     setTheme('light')
 }
+function progressBarCreate() {
+    let progressbutt = document.createElement('progress');
+    progressBar.appendChild(progressbutt);
+    progressbutt.setAttribute("max", questions.length)
+    progressbutt.setAttribute("value", counter)
+}
 handleChangeTheme();
 onCreate();
 function onCreate() {
     onFormCreate(questions);
     handleAnswersButtonClick();
     handleNextButtonClick();
+    progressBarCreate();
 }
