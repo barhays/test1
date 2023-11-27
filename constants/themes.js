@@ -1,4 +1,4 @@
-const Planets = [
+const planets = [
     {
         numberOfQuestion: 1,
         textOfQuestion: "How many planets are in the solar system?",
@@ -36,7 +36,7 @@ const Planets = [
         answers: ["Mercury", "Venus", "Jupiter"],
         rightanswer: ["Mercury"]
     }]
-const Sport = [
+const sport = [
     {
         numberOfQuestion: 1,
         textOfQuestion: "Which sport is known as The Beautiful Game?",
@@ -80,4 +80,4 @@ const Sport = [
         answers: ["Badminton", "Curling", "Squash", "Skateboarding", "Archery"],
         rightanswer: ["Badminton"]
     }]
-export const themes = [Planets, Sport]
+export const themes = [planets, sport]

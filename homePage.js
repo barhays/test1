@@ -1,8 +1,8 @@
-document.getElementById("Planets").addEventListener('click', () => {
+document.getElementById("planets").addEventListener('click', () => {
     localStorage.setItem("current_topic", 0)
     QuizPage();
 })
-document.getElementById("Sport").addEventListener('click', () => {
+document.getElementById("sport").addEventListener('click', () => {
     localStorage.setItem("current_topic", 1)
     QuizPage();
 })

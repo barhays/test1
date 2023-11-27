@@ -29,12 +29,12 @@ body {
     justify-self: center;
     align-self: center;
     padding: 0px 25px 40px 10px;
-    background-color: #e9ecf0;
-    border: 1px solid #f7fbfc;
+    background-color: #e9ebef;
+    border: 1px solid #494c4d;
     border-radius: 5px;
     color: #FFFFFF;
     font-weight: bold;
-    box-shadow: 5px 5px 5px #888;
+    box-shadow: 5px 5px 5px #434141;
     flex-wrap: wrap;
     max-width: 980px;
 }
@@ -194,7 +194,6 @@ body {
 
 .dark-theme {
     background-image: linear-gradient(to left top, #000000, #222222);
-
     color: #fff;
 }
 
