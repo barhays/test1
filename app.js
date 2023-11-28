@@ -84,13 +84,19 @@ function onFormCreate(questions) {
     button.innerText = "Next";
     button.addEventListener('click', () => {
         clearInterval(interval);
-    })
+    });
     nextButton.appendChild(button);
+
+    let button2 = document.createElement('button');
+    button2.innerText = "Right Answer";
+    document.querySelector('.AnswersButton').appendChild(button2);
 }
 
 
 function onDeleteItems() {
     let selectTopicButton = document.querySelector(".selectTopicButton")
+    let answerbut = document.querySelector('.AnswersButton')
+    answerbut.innerHTML = '';
     document.getElementById('sec').innerHTML = '';
     selectTopicButton.innerHTML = '';
     againButton.innerHTML = '';
@@ -243,10 +249,23 @@ function progressBarCreate() {
     progressbutt.setAttribute("max", questions.length)
     progressbutt.setAttribute("value", counter)
 }
+function handleRightAnswer() {
+    document.querySelector('.AnswersButton').querySelector("button").addEventListener('click', () => {
+        buttons.querySelectorAll("button").forEach(elem => {
+            if (answerschecked) {
+                if (questions[localStorage.getItem('counter')].rightanswer[0] == elem.innerText) {
+
+                    elem.style.backgroundColor = correctanswercolor;
+                }
+            }
+        })
+    })
+}
 handleChangeTheme();
 onCreate();
 function onCreate() {
     onFormCreate(questions);
+    handleRightAnswer();
     handleAnswersButtonClick();
     handleNextButtonClick();
     progressBarCreate();
