@@ -16,7 +16,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     min-height: 100vh;
     padding: 15px;
     flex-direction: column;
@@ -37,7 +36,7 @@ body {
     font-weight: bold;
     box-shadow: 5px 5px 5px #434141;
     flex-wrap: wrap;
-    width: 50vw;
+    min-width: 50vw;
 }
 
 .moreInfo {
