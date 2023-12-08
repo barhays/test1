@@ -21,6 +21,7 @@ body {
     padding: 15px;
     flex-direction: column;
     background-image: radial-gradient(circle, #c2c2c2, #f1f1f1);
+    font-family: 'Poppins', sans-serif;
 }
 
 .container {
@@ -28,35 +29,32 @@ body {
     height: auto;
     justify-self: center;
     align-self: center;
-    padding: 0px 25px 40px 10px;
+    padding: 10px 20px;
     background-color: #e9ebef;
     border: 1px solid #494c4d;
     border-radius: 5px;
-    color: #FFFFFF;
+    color: #000;
     font-weight: bold;
     box-shadow: 5px 5px 5px #434141;
     flex-wrap: wrap;
-    max-width: 980px;
+    width: 50vw;
 }
 
 .moreInfo {
     text-align: center;
-    color: black;
 }
 
 .title {
     text-align: center;
-    color: black;
     margin: 20px 0px;
 }
 
 .question {
     text-align: center;
-    color: black;
     margin: 20px 0px;
 }
 
-.buttons>button {
+.buttons button {
     background-color: #0f1dc0;
     border: none;
     color: white;
@@ -92,6 +90,7 @@ body {
     display: flex;
     justify-content: end;
     margin-top: 20px;
+
 }
 
 .againButton>button {
@@ -182,6 +181,26 @@ body {
     left: 0;
 }
 
+.AnswersButton>button {
+    background-color: #0f1dc0;
+    border: none;
+    width: min-content;
+    color: white;
+    padding: 15px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    word-wrap: break-word;
+}
+
+.AnswersButton {
+    justify-content: end;
+    min-width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+
 .popup-menu-item {
     padding: 10px;
     cursor: pointer;
@@ -192,9 +211,25 @@ body {
     background-color: #f9f9f9;
 }
 
-.dark-theme {
-    background-image: linear-gradient(to left top, #000000, #222222);
-    color: #fff;
+progress::-webkit-progress-bar {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #2196f3;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+button {
+    border-radius: 5px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+    background-color: #3743cc;
 }
 
 .progressbar>progress {
@@ -216,21 +251,33 @@ progress::-webkit-progress-value {
     border-radius: 10px;
     transition: width 0.5s ease-in-out;
 }
-.AnswersButton > button{
-    background-color: #0f1dc0;
-    border: none;
-    width:min-content;
-    color: white;
-    padding: 15px 32px;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
-    word-wrap: break-word;
+
+.dark-theme {
+    background: #222222;
+    color: #fff;
 }
-.AnswersButton{
-    justify-content: end;
-    min-width: 100%;
-    display: flex;
-    justify-content: end;
-    margin-top: 20px;
+
+.dark-theme .container {
+    background: #3C3B3A;
+    color: #fff;
+}
+
+
+.dark-theme button {
+    background: #5e5e5e;
+}
+
+.dark-theme button:hover {
+    background: #545454;
+}
+
+.dark-theme progress::-webkit-progress-bar {
+    background-color: #5e5e5e;
+    border-radius: 10px;
+}
+
+.dark-theme progress::-webkit-progress-value {
+    background-color: #DDE6ED;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
 }
