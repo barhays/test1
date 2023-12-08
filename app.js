@@ -1,8 +1,8 @@
 
 import { themes } from "./constants/themes.js";
 const questions = themes[localStorage.getItem('current_topic')];
-const wronganswercolor = "red";
-const correctanswercolor = "green";
+const wronganswercolor = "#cc6868";
+const correctanswercolor = "#6dba77";
 let answerschecked = false;
 let counter = localStorage.getItem('counter')
 const title = document.querySelector(".title");
